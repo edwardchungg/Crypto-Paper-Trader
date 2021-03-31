@@ -1,6 +1,6 @@
 body{
     text-align: center;
-
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -10,7 +10,6 @@ body{
     margin-left: 3px;
     margin-right: 3px;
     margin-top: 10px;
-    margin-bottom:
 }
 
 .container{
