@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Crypto Paper Trader</h1>
+
+            <div class="row">
+                <div class="col">
+                    <h3>Portfolio</h3>
+                    <h2 class="total-value-shake">$<span id="total-portfolio-value"></span></h4>
+                    <h4>Equity: $<span id="total-equity"></span></h4>
+                    <h4>Cash: $<span id="total-cash"></span></h4>
+                    <h4>Returns:</h4><h4 id='returns-text'><span id="returns-plus"></span>$<span id="total-returns"></span><span id="total-returns-percentage"></span></h4>
+                    <button onclick="reset()" class="btn btn-danger">Reset</button>                
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">                  
+                    <h3>Bitcoin</h3>  
+                    <h5 class="price-shake"> $<span id="bitcoin-current-span" ></span></h5><br>
+                    <img src="https://localbitcoinnow.com/wp-content/uploads/2019/12/The-bit-logo-e1575819611411.png" class="coin-logo">          
+                    <h5>Amount Owned:</h5>
+                    <h5><span id="bitcoin-current-quantity"></span></h5>
+                    <h5>Average Price Paid:</h5>
+                    <h5>$<span id="bitcoin-average-cost"></span></h5>
+                    <h5>Total Cost:</h5>
+                    <h5>$<span id="bitcoin-total-cost"></span></h5>
+                    <h5>Total Equity:</h5>
+                    <h5>$<span id="bitcoin-equity"></span></h5>
+                    <h5>Returns:</h5>
+                    <h5 id="bitcoin-returns-text"><span id="bitcoin-returns-plus"></span>$<span id="bitcoin-returns"></span><span id="bitcoin-returns-percentage"></span></h5>    
+                </div>
+                <div class="col">
+                    <h3>Chainlink </h3> 
+                    <h5 class="price-shake"> $<span id="chainlink-current-span" ></span></h5> <br>
+                    <img src="https://www.coinopsy.com/media/img/quality_logo/ChainLink.png" class="coin-logo">
+                    <h5>Amount Owned:</h5>
+                    <h5><span id="chainlink-current-quantity"></span></h5>
+                    <h5>Average Price Paid:</h5>
+                    <h5>$<span id="chainlink-average-cost"></span></h5>
+                    <h5>Total Cost:</h5>
+                    <h5>$<span id="chainlink-total-cost"></span></h5>
+                    <h5>Total Equity:</h5>
+                    <h5>$<span id="chainlink-equity"></span></h5>
+                    <h5>Returns:</h5>
+                    <h5 id="chainlink-returns-text"><span id="chainlink-returns-plus"></span>$<span id="chainlink-returns"></span><span id="chainlink-returns-percentage"></span></h5>    
+                </div>
+                <div class="col">
+                    <h3>Dogecoin</h3>
+                    <h5 class="price-shake">$<span id="dogecoin-current-span" ></span></h5> <br>  
+                    <img src="https://cdn.worldvectorlogo.com/logos/dogecoin.svg" class="coin-logo">
+                    <h5>Amount Owned:</h5>
+                    <h5><span id="dogecoin-current-quantity"></span></h5>
+                    <h5>Average Price Paid:</h5>
+                    <h5>$<span id="dogecoin-average-cost"></span></h5>
+                    <h5>Total Cost:</h5>
+                    <h5>$<span id="dogecoin-total-cost"></span></h5>
+                    <h5>Total Equity:</h5>
+                    <h5>$<span id="dogecoin-equity"></span></h5>
+                    <h5>Returns:</h5>
+                    <h5 id="dogecoin-returns-text"><span id="dogecoin-returns-plus"></span>$<span id="dogecoin-returns"></span><span id="dogecoin-returns-percentage"></span></h5>   
+                </div>
+                <div class="col">
+                    <h3>Ethereum </h3>
+                    <h5 class="price-shake">$<span id="ethereum-current-span" ></span></h5><br>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/1200px-Ethereum-icon-purple.svg.png" class="coin-logo">
+                    <h5>Amount Owned:</h5>
+                    <h5><span id="ethereum-current-quantity"></span></h5>
+                    <h5>Average Price Paid:</h5>
+                    <h5>$<span id="ethereum-average-cost"></span></h5>
+                    <h5>Total Cost:</h5>
+                    <h5>$<span id="ethereum-total-cost"></span></h5>
+                    <h5>Total Equity:</h5>
+                    <h5>$<span id="ethereum-equity"></span></h5>
+                    <h5>Returns:</h5>
+                    <h5 id="ethereum-returns-text"><span id="ethereum-returns-plus"></span>$<span id="ethereum-returns"></span><span id="ethereum-returns-percentage"></span></h5>
+                </div>
+                <div class="col">
+                    <h3>Litecoin</h3>
+                    <h5 class="price-shake"> $<span id="litecoin-current-span" ></span></h5><br>
+                    <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="coin-logo">
+                    <h5>Amount Owned:</h5>
+                    <h5><span id="litecoin-current-quantity"></span></h5>
+                    <h5>Average Price Paid:</h5>
+                    <h5>$<span id="litecoin-average-cost"></span></h5>
+                    <h5>Total Cost:</h5>
+                    <h5>$<span id="litecoin-total-cost"></span></h5>
+                    <h5>Total Equity:</h5>
+                    <h5>$<span id="litecoin-equity"></span></h5>
+                    <h5>Returns:</h5>
+                    <h5 id="litecoin-returns-text"><span id="litecoin-returns-plus"></span>$<span id="litecoin-returns"></span><span id="litecoin-returns-percentage"></span></h5>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col" onsubmit="orderSubmit()" id="order-form">
+                    
+                    <h3>Order Form</h3>
+                
+                    <input type="radio" id="buy" name="order-type" value="buy" class="btn-check" required>
+                    <label for="buy" class="radio"> Buy </label>
+                    <input type="radio" id="sell" name="order-type" class="btn-check" value="sell" > 
+                    <label for="sell" class="radio"> Sell </label><br>
+                    
+                    <label for="crypto-type">Select a cryptocurrency:</label>
+                    <select name="crypto-type" id="crypto-type" onchange="dropdownListener(this.value)" required>
+                    <option disabled selected value> -- Select an option -- </option>
+                    <option value="bitcoin-current-price">Bitcoin</option>
+                    <option value="chainlink-current-price">Chainlink</option>
+                    <option value="dogecoin-current-price">Dogecoin</option>
+                    <option value="ethereum-current-price">Ethereum</option>
+                    <option value="litecoin-current-price">Litecoin</option>
+                    </select><br>
+                    
+                    <label for="quantity">Quantity</label>
+                    <input type="number" step="0.00000001" name="quantity" id="order-quantity" onchange="quantityListener(this.value)" required>
+
+                    <p> Current price of coin: $<span id="form-current-price"></span></p>
+                    <p> Total value of order: <span>$<span id="form-order-value"></span></span></p>
+                    
+                    <button class="btn btn-info">Submit Order</button>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div><h3> Orders </h3></div>
+                    <div id="table-container"></div>
+                    <div id="orders-table"></div>
+                </div>
+            </div>
+
+
+            
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="script.js" async defer></script>
+        <script src="2dArray.js"></script>
+    </body>
+</html>

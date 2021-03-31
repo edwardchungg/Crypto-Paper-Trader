@@ -1,0 +1,93 @@
+body{
+    text-align: center;
+
+}
+
+
+.col{
+    border: 0.5px solid;
+    border-radius: 25px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 10px;
+    margin-bottom:
+}
+
+.container{
+    width: 80%;
+}
+
+#orders-table{
+    border: none;
+}
+
+.coin-logo{
+    width: 100px;
+    padding: 8px;
+}
+.btn-info{
+    margin: 10px;
+}
+
+.price-shake {
+    position: relative;
+    text-transform: uppercase;
+    
+    text-align: center;
+
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    background-size: 120% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -ms-background-clip: text;
+    -ms-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    background-color: #34a607;
+    animation: 1s shake infinite alternate;
+  }
+  
+  @keyframes shake {
+    0% { transform: skewX(-15deg); }
+    5% { transform: skewX(15deg); }
+    10% { transform: skewX(-15deg); }
+    15% { transform: skewX(15deg); }
+    20% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }  
+  }
+
+  .total-value-shake {
+    position: relative;
+    text-transform: uppercase;
+    
+    text-align: center;
+
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    background-size: 120% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -ms-background-clip: text;
+    -ms-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    background-color: black;
+    animation: 1s shake infinite alternate;
+    animation-delay: 5s;
+  }
+  
+  @keyframes shake {
+    0% { transform: skewX(-15deg); }
+    5% { transform: skewX(15deg); }
+    10% { transform: skewX(-15deg); }
+    15% { transform: skewX(15deg); }
+    20% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }  
+  }
