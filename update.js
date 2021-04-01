@@ -25,17 +25,24 @@ const updateMarket = () => {
         localStorage.setItem("litecoin-current-price", data.litecoin.usd);
 
         update();
-    })
+    })/*
     .catch(error => {
         console.log("fetchAPI Error: " + error);
-    });
+    });*/
 }
 
 
 const update = () => {
 
     //Create allOrders Table
-    createTable(stringToArray(localStorage.getItem("allOrders")));
+
+    // If page = performance.html : don't create table
+    let path = window.location.pathname;
+    let page = path.split("/").pop();
+    if (page != "performance.html"){
+        createTable(stringToArray(localStorage.getItem("allOrders")));
+    }
+
 
     //Display Current Prices:
     document.getElementById("bitcoin-current-span").innerText = localStorage.getItem("bitcoin-current-price");
@@ -44,24 +51,23 @@ const update = () => {
     document.getElementById("ethereum-current-span").innerText = localStorage.getItem("ethereum-current-price");
     document.getElementById("litecoin-current-span").innerText = localStorage.getItem("litecoin-current-price");
 
-    //Calculate Total Assets:
-    let assets = parseFloat(
+    //Calculate Total equity:
+    let equity = parseFloat(
         (localStorage.getItem('bitcoin-current-price')) * parseFloat(localStorage.getItem('bitcoin-count')) 
         + (localStorage.getItem('chainlink-current-price')) * parseFloat(localStorage.getItem('chainlink-count'))
         + (localStorage.getItem('dogecoin-current-price')) * parseFloat(localStorage.getItem('dogecoin-count'))
         + (localStorage.getItem('ethereum-current-price')) * parseFloat(localStorage.getItem('ethereum-count'))
         + (localStorage.getItem('litecoin-current-price')) * parseFloat(localStorage.getItem('litecoin-count'))
         );
-    console.log(assets);
 
 
     //Display Total Value of Portfolio:
-    document.getElementById("total-portfolio-value").innerText = (parseFloat(localStorage.getItem("cash")) + assets).toFixed(2);
-    document.getElementById('total-equity').innerText = assets.toFixed(2);
+    var totalValue = (parseFloat(localStorage.getItem("cash")) + equity).toFixed(2);
+    document.getElementById("total-portfolio-value").innerText = totalValue;
+     document.getElementById('total-equity').innerText = equity.toFixed(2);
     document.getElementById('total-cash').innerText = ((parseFloat(localStorage.getItem("cash"))).toFixed(2));
-    let totalReturns = ((parseFloat(localStorage.getItem('cash')) + assets) - 1000000).toFixed(2);
+    let totalReturns = ((parseFloat(localStorage.getItem('cash')) + equity) - 1000000).toFixed(2);
     let totalReturnsPercentage = (totalReturns / (1000000) * 100).toFixed(2);
-    console.log(totalReturnsPercentage);
     if (totalReturnsPercentage == 0){
         document.getElementById('total-returns-percentage').innerText = ' (<0.01%)';
     }
@@ -124,7 +130,6 @@ const update = () => {
     let chainlinkReturns = (chainlinkEquity - chainlinkTotalCost).toFixed(2);
     document.getElementById('chainlink-returns').innerText = chainlinkReturns;
     let chainlinkReturnsPercentage = ((chainlinkReturns / chainlinkTotalCost) * 100).toFixed(2);
-    console.log("chainlinkReturnsPercentage: " + chainlinkReturnsPercentage);
     if ((chainlinkReturnsPercentage == 0) || chainlinkTotalCost == 0) {
         document.getElementById('chainlink-returns-percentage').innerText = ' (<0.01%)';
     }
@@ -231,183 +236,25 @@ const update = () => {
         document.getElementById('litecoin-returns-percentage').innerText = ' (0%)';
     }
 
+    // Create Charts
+
+    createPieChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
+    createBarChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
+    createDoughnutChart(((parseFloat(localStorage.getItem("cash"))).toFixed(2)),equity.toFixed(2));
+
+    // Append historialPerformance to localStorage
+    historicalPerformance(totalValue);
+
 }
 
 const dropdownListener = (value) => {
     document.getElementById("form-current-price").innerText = localStorage.getItem(value);
 }
 const quantityListener = (value) => {
-    
     document.getElementById("form-order-value").innerText = (value * localStorage.getItem(document.getElementById("crypto-type").value)).toFixed(2);
 }
 
-const orderSubmit = () => {
 
-    // 1. Complete the order calculations 
-    // Need to write this function
-    // Will return an array
-    
-
-    // 2. Create array containing order 
-    // [OrderID, OrderType, Cryptocoin, Quantity, Price, TotalCost]
-
-//    let order = [orderID, orderType, cryptocurrency, Quantity, Price, TotalCost];
-
-    // 3. Append order array to allOrders array
-    // {[...], [...], [...]}
-    // Note: 
-    // - 1. Retrieve value of localStorage "allOrders" and parse it to a 2D Array.
-    // - 2. Append our order array to this 2D array.
-    // - 3. Reassign the localStorage string to our newly updated 2D array as a string ( delimited by , and ; ).
-    // -    new cell = ,
-    // -    new array = ;
-
-
-    let orderID = generateOrderID();
-    console.log("count of orderID:" + orderID);
-
-    // Grab Buy/Sell Value
-    let orderType = document.querySelector('input[name="order-type"]:checked').value;
-    console.log(orderType);
-
-    // Grab Cryptocurrency value
-    let cryptocurrency = document.getElementById("crypto-type").value;
-    console.log(cryptocurrency);
-
-    // Grab Order Quantity
-    let quantity = document.getElementById("order-quantity").value;
-    console.log(quantity);
-
-    // Grab Coin Price from localStorage
-    let price = localStorage.getItem(document.getElementById("crypto-type").value);
-    console.log(price);
-
-    let totalCost = price * quantity;
-    console.log(totalCost.toFixed(2));
-    
-    let order = [orderID,orderType,cryptocurrency,quantity,price,totalCost.toFixed(2)];
-
-    orderCalculate(orderType,cryptocurrency,quantity,price,totalCost);
-    update();
-    createOrder(order);
-    createTable(stringToArray(localStorage.getItem("allOrders")));
-}
-
-const orderCalculate = (orderType,cryptocurrency,quantity,price,totalCost) =>{
-    
-    var currentQuantity,currentCost, currentCash;
-    
-    currentCash = parseFloat(localStorage.getItem('cash'));
-
-    if (cryptocurrency == 'bitcoin-current-price'){
-        currentQuantity = parseFloat(localStorage.getItem('bitcoin-count'));
-        currentCost = parseFloat(localStorage.getItem('bitcoin-avg-price'));
-    }
-    else if (cryptocurrency == 'chainlink-current-price'){
-        currentQuantity = parseFloat(localStorage.getItem('chainlink-count'));
-        currentCost = parseFloat(localStorage.getItem('chainlink-avg-price'));
-    }
-    else if (cryptocurrency == 'dogecoin-current-price'){
-        currentQuantity = parseFloat(localStorage.getItem('dogecoin-count'));
-        currentCost = parseFloat(localStorage.getItem('dogecoin-avg-price'));
-
-    }
-    else if (cryptocurrency == 'ethereum-current-price'){
-        currentQuantity = parseFloat(localStorage.getItem('ethereum-count'));
-        currentCost = parseFloat(localStorage.getItem('ethereum-avg-price'));
-    }
-    else if (cryptocurrency == 'litecoin-current-price'){
-        currentQuantity = parseFloat(localStorage.getItem('litecoin-count'));
-        currentCost = parseFloat(localStorage.getItem('litecoin-avg-price'));
-    }
-
-    if (orderType == 'sell') {
-        if (quantity > currentQuantity){
-            alert('You tried to sell more than you own!')
-            throw error('You tried to sell more than you own!');
-        }
-        else{
-            currentQuantity = currentQuantity - parseFloat(quantity);
-            currentCash = currentCash + (parseFloat(totalCost));
-            if (currentQuantity == 0) {
-                console.log("currentQuantity: " + currentQuantity);
-                console.log("quantity: " + quantity);
-                currentCost = 0;
-            }
-        }
-    }
-    else{ //orderType = 'buy'
-
-        if (parseFloat(totalCost) > parseFloat(localStorage.getItem('cash'))){
-            alert('You do not have enough cash!');
-            throw error('You tried to buy more than you own!');
-        }
-
-        // Average Cost = (Original Cost * Original Shares) + (New Cost + New Shares)
-        //                ------------------------------------------------------------
-        //                                             Total Shares
-        console.log("Quantity: " + quantity);
-        console.log("currentCost: " + currentCost);
-        console.log("currentQuantity: "+ currentQuantity);
-        console.log("totalCost: " + totalCost);
-        currentCost = ((currentCost * currentQuantity) + (parseFloat(totalCost))) / (currentQuantity + parseFloat(quantity));
-
-        // Total Shares = Total Shares + New Shares
-        currentQuantity = currentQuantity + parseFloat(quantity);
-
-        currentCash = currentCash - parseFloat(totalCost);
-    }
-
-    console.log("currenCost: " + currentCost);
-    console.log("currentQuantity: " + currentQuantity);
-
-    if (cryptocurrency == 'bitcoin-current-price'){
-        localStorage.setItem("bitcoin-count", currentQuantity);
-        localStorage.setItem("bitcoin-avg-price", currentCost);
-    }
-    else if (cryptocurrency == 'chainlink-current-price'){
-        localStorage.setItem("chainlink-count", currentQuantity);
-        localStorage.setItem("chainlink-avg-price", currentCost);
-    }
-    else if (cryptocurrency == 'dogecoin-current-price'){
-        localStorage.setItem("dogecoin-count", currentQuantity);
-        localStorage.setItem("dogecoin-avg-price", currentCost);
-    }
-    else if (cryptocurrency == 'ethereum-current-price'){
-        localStorage.setItem("ethereum-count", currentQuantity);
-        localStorage.setItem("ethereum-avg-price", currentCost);
-    }
-    else if (cryptocurrency == 'litecoin-current-price'){
-        localStorage.setItem("litecoin-count", currentQuantity);
-        localStorage.setItem("litecoin-avg-price", currentCost);
-    }
-    
-    localStorage.setItem('cash', currentCash);
-
-}
-
-const generateOrderID = () => {
-    let count = 0;
-
-    // Retrieve All Orders
-    if ((localStorage.getItem("allOrders") == null)) {
-        return 0;
-    }
-    else{
-        let string = localStorage.getItem("allOrders");
-
-        //Parse to 2D Array
-        let array = stringToArray(string);
-    
-        //Get the length of Array (number of orders)
-        count = array.length;
-        
-        return count;
-    }
-    
-
-
-}
 
 const initializeLocalStorage = () => {
     if (localStorage.getItem("allOrders") == null) {
@@ -455,9 +302,8 @@ const reset = () => {
 }
 updateMarket();
 $(document).ready(function() {
-    setInterval(updateMarket,30000); 
-    // Update Prices every 30 seconds
+    setInterval(updateMarket,60000); 
+    // Update Prices every 1 minute
  });
 initializeLocalStorage();
-
 

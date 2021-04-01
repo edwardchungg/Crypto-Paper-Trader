@@ -28,6 +28,16 @@ body{
     margin: 10px;
 }
 
+.inputForm-container{
+  height: 40%;
+  width: 70%;
+  
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
 .price-shake {
     position: relative;
     text-transform: uppercase;

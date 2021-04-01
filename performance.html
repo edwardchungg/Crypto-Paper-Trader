@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -51,14 +51,29 @@
                 <div class="col">
                     <h3>Portfolio</h3>
                     <h2 class="total-value-shake">$<span id="total-portfolio-value"></span></h4>
-                    <h4>Equity: $<span id="total-equity"></span></h4>
-                    <h4>Cash: $<span id="total-cash"></span></h4>
+                    <h4 style="display:none">Equity: $<span id="total-equity"></span></h4>
+                    <h4 style="display:none">Cash: $<span id="total-cash"></span></h4>
                     <h4>Returns:</h4><h4 id='returns-text'><span id="returns-plus"></span>$<span id="total-returns"></span><span id="total-returns-percentage"></span></h4>
-                    <button onclick="reset()" class="btn btn-danger">Reset</button>                
+                    <canvas id="line-chart" width="400" height="250"></canvas>
                 </div>
             </div>
-
             <div class="row">
+                <div class="col">
+                    <canvas id="pie-chart" width="400" height="250"></canvas>
+                </div>
+                <div class="col">
+                    <canvas id="bar-chart" width="400" height="250"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <canvas id="doughnut-chart" width="400" height="250"></canvas>
+                </div>
+            </div>
+             
+            </div>
+
+            <div class="row" style="display:none">
                 <div class="col">                  
                     <h3>Bitcoin</h3>  
                     <h5 class="price-shake"> $<span id="bitcoin-current-span" ></span></h5><br>
@@ -136,57 +151,15 @@
                 </div>
             </div>
 
-            <!-- Submit Order Form -->
-
-            <div class="row">
-                <form class="col" onsubmit="orderSubmit()" id="order-form">
-                    
-                    <h3>Order Form</h3>
-                
-                    <input type="radio" id="buy" name="order-type" value="buy" class="btn-check" required>
-                    <label for="buy" class="radio"> Buy </label>
-                    <input type="radio" id="sell" name="order-type" class="btn-check" value="sell" > 
-                    <label for="sell" class="radio"> Sell </label><br>
-                    
-                    <label for="crypto-type">Select a cryptocurrency:</label>
-                    <select name="crypto-type" id="crypto-type" onchange="dropdownListener(this.value)" required>
-                    <option disabled selected value> -- Select an option -- </option>
-                    <option value="bitcoin-current-price">Bitcoin</option>
-                    <option value="chainlink-current-price">Chainlink</option>
-                    <option value="dogecoin-current-price">Dogecoin</option>
-                    <option value="ethereum-current-price">Ethereum</option>
-                    <option value="litecoin-current-price">Litecoin</option>
-                    </select><br>
-                    
-                    <label for="quantity">Quantity</label>
-                    <input type="number" step="0.00000001" name="quantity" id="order-quantity" onchange="quantityListener(this.value)" required>
-
-                    <p> Current price of coin: $<span id="form-current-price"></span></p>
-                    <p> Total value of order: <span>$<span id="form-order-value"></span></span></p>
-                    
-                    <button class="btn btn-info">Submit Order</button>
-                </form>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col">
-                    <div><h3> Orders </h3></div>
-                    <div id="table-container">
-                    </div>
-                    
-                </div>
-            </div>
-
 
             
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src="update.js" async defer></script>
-        <script src="order.js"></script>
         <script src="parse.js"></script>
-        <script src="tableCreator.js"></script>
+        <script src="chart.js"></script>
+        <script src="historialPerformance.js"></script>
     </body>
 </html>
