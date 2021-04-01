@@ -84,7 +84,8 @@ const update = () => {
     let page = path.split("/").pop();
 
     // Page = Index.html
-    if (page == "index.html"){
+    console.log(page);
+    if (page == "" || page == "index.html"){
 
 
         //Display Current Prices:
