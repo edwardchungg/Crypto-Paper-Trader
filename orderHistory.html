@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Orders</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,6 +43,22 @@
  
         </header>
 
+            <!-- Hidden Div -->
+
+            <div class="row" style="display: none">
+                <div class="col">
+                    <h3>Portfolio</h3>
+                    <h2 class="total-value-shake">$<span id="total-portfolio-value"></span></h4>
+                    <h4>Equity: $<span id="total-equity"></span></h4>
+                    <h4>Cash: $<span id="total-cash"></span></h4>
+                    <h4>Returns:</h4><h4 id='returns-text'><span id="returns-plus"></span>$<span id="total-returns"></span><span id="total-returns-percentage"></span></h4>
+                    <button onclick="reset()" class="btn btn-danger">Reset</button>                
+                </div>
+            </div>
+
+
+
+
             <div class="row" style="width: 80%; margin: auto">
                 <div class="col">
                     <h3> Orders </h3>
@@ -59,5 +75,6 @@
         <script src="update.js" async defer></script>
         <script src="parse.js"></script>
         <script src="tableCreator.js"></script>
+        <script src="historicalPerformance.js"></script>
     </body>
 </html>

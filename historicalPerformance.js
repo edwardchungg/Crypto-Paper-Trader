@@ -41,5 +41,11 @@ const updatePerformanceChart = () => {
         timeArray.push(item[0]);
         valueArray.push(item[1]);
     }
-    createPerformanceChart(timeArray,valueArray);
+    // Get current page
+    let path = window.location.pathname;
+    let page = path.split("/").pop();
+    if (page == "performance.html"){
+        createPerformanceChart(timeArray,valueArray);
+    }
+
 }

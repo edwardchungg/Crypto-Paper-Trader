@@ -34,72 +34,120 @@ const updateMarket = () => {
 
 const update = () => {
 
-    //Create allOrders Table
+    // Establish variables
 
-    // If page = performance.html : don't create table
-    let path = window.location.pathname;
-    let page = path.split("/").pop();
-    if (page != "performance.html"){
-        createTable(stringToArray(localStorage.getItem("allOrders")));
-    }
-
-
-    //Display Current Prices:
-    document.getElementById("bitcoin-current-span").innerText = localStorage.getItem("bitcoin-current-price");
-    document.getElementById("chainlink-current-span").innerText = localStorage.getItem("chainlink-current-price");
-    document.getElementById("dogecoin-current-span").innerText = localStorage.getItem("dogecoin-current-price");
-    document.getElementById("ethereum-current-span").innerText = localStorage.getItem("ethereum-current-price");
-    document.getElementById("litecoin-current-span").innerText = localStorage.getItem("litecoin-current-price");
-
-    //Calculate Total equity:
+    //  Calculate Total equity:
     let equity = parseFloat(
-        (localStorage.getItem('bitcoin-current-price')) * parseFloat(localStorage.getItem('bitcoin-count')) 
-        + (localStorage.getItem('chainlink-current-price')) * parseFloat(localStorage.getItem('chainlink-count'))
-        + (localStorage.getItem('dogecoin-current-price')) * parseFloat(localStorage.getItem('dogecoin-count'))
-        + (localStorage.getItem('ethereum-current-price')) * parseFloat(localStorage.getItem('ethereum-count'))
-        + (localStorage.getItem('litecoin-current-price')) * parseFloat(localStorage.getItem('litecoin-count'))
-        );
-
-
-    //Display Total Value of Portfolio:
+    (localStorage.getItem('bitcoin-current-price')) * parseFloat(localStorage.getItem('bitcoin-count')) 
+    + (localStorage.getItem('chainlink-current-price')) * parseFloat(localStorage.getItem('chainlink-count'))
+    + (localStorage.getItem('dogecoin-current-price')) * parseFloat(localStorage.getItem('dogecoin-count'))
+    + (localStorage.getItem('ethereum-current-price')) * parseFloat(localStorage.getItem('ethereum-count'))
+    + (localStorage.getItem('litecoin-current-price')) * parseFloat(localStorage.getItem('litecoin-count'))
+    );
     var totalValue = (parseFloat(localStorage.getItem("cash")) + equity).toFixed(2);
-    document.getElementById("total-portfolio-value").innerText = totalValue;
-     document.getElementById('total-equity').innerText = equity.toFixed(2);
-    document.getElementById('total-cash').innerText = ((parseFloat(localStorage.getItem("cash"))).toFixed(2));
     let totalReturns = ((parseFloat(localStorage.getItem('cash')) + equity) - 1000000).toFixed(2);
     let totalReturnsPercentage = (totalReturns / (1000000) * 100).toFixed(2);
-    if (totalReturnsPercentage == 0){
-        document.getElementById('total-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
-        document.getElementById('total-returns-percentage').innerText = ' (' + totalReturnsPercentage + '%)';
-    }
+
+
+    // Bitcoin
+    let bitcoinTotalCost = (parseFloat(localStorage.getItem('bitcoin-count')) * parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
+    let bitcoinEquity =  ( parseFloat(localStorage.getItem('bitcoin-count')) * parseFloat(localStorage.getItem("bitcoin-current-price"))).toFixed(2);
+    let bitcoinReturns = (bitcoinEquity - bitcoinTotalCost).toFixed(2);
+    let bitcoinReturnsPercentage = ((bitcoinReturns / bitcoinTotalCost) * 100).toFixed(2);
+
+    // Chainlink
+    let chainlinkTotalCost =  (parseFloat(localStorage.getItem('chainlink-count')) * parseFloat(localStorage.getItem('chainlink-avg-price'))).toFixed(2);
+    let chainlinkEquity = ( parseFloat(localStorage.getItem('chainlink-count')) * parseFloat(localStorage.getItem("chainlink-current-price"))).toFixed(2);
+    let chainlinkReturns = (chainlinkEquity - chainlinkTotalCost).toFixed(2);
+    let chainlinkReturnsPercentage = ((chainlinkReturns / chainlinkTotalCost) * 100).toFixed(2);
+
+    // Dogecoin
+    let dogecoinTotalCost = (parseFloat(localStorage.getItem('dogecoin-count')) * parseFloat(localStorage.getItem('dogecoin-avg-price'))).toFixed(2);
+    let dogecoinEquity = ( parseFloat(localStorage.getItem('dogecoin-count')) * parseFloat(localStorage.getItem("dogecoin-current-price"))).toFixed(2);
+    let dogecoinReturns = (dogecoinEquity - dogecoinTotalCost).toFixed(2);
+    let dogecoinReturnsPercentage = ((dogecoinReturns / dogecoinTotalCost) * 100).toFixed(2);
+
+    // Ethereum
+    let ethereumTotalCost =  (parseFloat(localStorage.getItem('ethereum-count')) * parseFloat(localStorage.getItem('ethereum-avg-price'))).toFixed(2);
+    let ethereumEquity = ( parseFloat(localStorage.getItem('ethereum-count')) * parseFloat(localStorage.getItem("ethereum-current-price"))).toFixed(2);
+    let ethereumReturns = (ethereumEquity - ethereumTotalCost).toFixed(2);
+    let ethereumReturnsPercentage = ((ethereumReturns / ethereumTotalCost) * 100).toFixed(2);
+
+    // Litecoin
+    let litecoinTotalCost = (parseFloat(localStorage.getItem('litecoin-count')) * parseFloat(localStorage.getItem('litecoin-avg-price'))).toFixed(2);
+    let litecoinEquity = ( parseFloat(localStorage.getItem('litecoin-count')) * parseFloat(localStorage.getItem("litecoin-current-price"))).toFixed(2);
+    let litecoinReturns = (litecoinEquity - litecoinTotalCost).toFixed(2);
+    let litecoinReturnsPercentage = ((litecoinReturns / litecoinTotalCost) * 100).toFixed(2);
+
+    // Get current page
+    let path = window.location.pathname;
+    let page = path.split("/").pop();
+
+    // Page = Index.html
+    if (page == "index.html"){
+
+
+        //Display Current Prices:
+        document.getElementById("bitcoin-current-span").innerText = localStorage.getItem("bitcoin-current-price");
+        document.getElementById("chainlink-current-span").innerText = localStorage.getItem("chainlink-current-price");
+        document.getElementById("dogecoin-current-span").innerText = localStorage.getItem("dogecoin-current-price");
+        document.getElementById("ethereum-current-span").innerText = localStorage.getItem("ethereum-current-price");
+        document.getElementById("litecoin-current-span").innerText = localStorage.getItem("litecoin-current-price");
+
     
-    document.getElementById('total-returns').innerText = totalReturns;
-    if (totalReturns > 0){
-        document.getElementById('returns-text').style.color = 'green';
-        document.getElementById('returns-plus').innerText = '+';
-    }
-    else if (totalReturns < 0){
-        document.getElementById('returns-text').style.color = 'red';
-    }
-    else{
-        document.getElementById('total-returns-percentage').innerText = ' (0%)';
-    }
 
 
+        //Display Portfolio Information:
+        document.getElementById("total-portfolio-value").innerText = totalValue;
+        document.getElementById('total-equity').innerText = equity.toFixed(2);
+        document.getElementById('total-cash').innerText = ((parseFloat(localStorage.getItem("cash"))).toFixed(2));
+        if (totalReturnsPercentage == 0){
+            document.getElementById('total-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('total-returns-percentage').innerText = ' (' + totalReturnsPercentage + '%)';
+        }
+        document.getElementById('total-returns').innerText = totalReturns;
+        if (totalReturns > 0){
+            document.getElementById('returns-text').style.color = 'green';
+            document.getElementById('returns-plus').innerText = '+';
+        }
+        else if (totalReturns < 0){
+            document.getElementById('returns-text').style.color = 'red';
+        }
+        else{
+            document.getElementById('total-returns-percentage').innerText = ' (0%)';
+        }
 
-    //Display Current Shares and Equity:
+        // Bitcoin Display
+
+        document.getElementById('bitcoin-current-quantity').innerText = localStorage.getItem('bitcoin-count');
+        document.getElementById('bitcoin-average-cost').innerText = (parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
+        document.getElementById('bitcoin-total-cost').innerText = bitcoinTotalCost;
+        document.getElementById('bitcoin-equity').innerText = bitcoinEquity;
+        document.getElementById('bitcoin-returns').innerText = bitcoinReturns;
+        if ((bitcoinReturnsPercentage == 0) || bitcoinTotalCost == 0){
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (' + bitcoinReturnsPercentage + '%)';
+        }
+        if(bitcoinReturns > 0){
+            document.getElementById('bitcoin-returns-text').style.color='green';
+            document.getElementById('bitcoin-returns-plus').innerText = '+';
+        }
+        else if (bitcoinReturns < 0){
+            document.getElementById('bitcoin-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (0%)';
+        }
 
     // Bitcoin
 
     document.getElementById('bitcoin-current-quantity').innerText = localStorage.getItem('bitcoin-count');
     document.getElementById('bitcoin-average-cost').innerText = (parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
-    let bitcoinTotalCost = (parseFloat(localStorage.getItem('bitcoin-count')) * parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
     document.getElementById('bitcoin-total-cost').innerText = bitcoinTotalCost;
-    let bitcoinEquity =  ( parseFloat(localStorage.getItem('bitcoin-count')) * parseFloat(localStorage.getItem("bitcoin-current-price"))).toFixed(2);
-    let bitcoinReturns = (bitcoinEquity - bitcoinTotalCost).toFixed(2);
-    let bitcoinReturnsPercentage = ((bitcoinReturns / bitcoinTotalCost) * 100).toFixed(2);
     document.getElementById('bitcoin-equity').innerText = bitcoinEquity;
     document.getElementById('bitcoin-returns').innerText = bitcoinReturns;
     if ((bitcoinReturnsPercentage == 0) || bitcoinTotalCost == 0){
@@ -123,13 +171,9 @@ const update = () => {
 
     document.getElementById('chainlink-current-quantity').innerText = localStorage.getItem('chainlink-count');
     document.getElementById('chainlink-average-cost').innerText = (parseFloat(localStorage.getItem('chainlink-avg-price'))).toFixed(2);
-    let chainlinkTotalCost =  (parseFloat(localStorage.getItem('chainlink-count')) * parseFloat(localStorage.getItem('chainlink-avg-price'))).toFixed(2);
     document.getElementById('chainlink-total-cost').innerText = chainlinkTotalCost;
-    let chainlinkEquity = ( parseFloat(localStorage.getItem('chainlink-count')) * parseFloat(localStorage.getItem("chainlink-current-price"))).toFixed(2);
     document.getElementById('chainlink-equity').innerText = chainlinkEquity;
-    let chainlinkReturns = (chainlinkEquity - chainlinkTotalCost).toFixed(2);
     document.getElementById('chainlink-returns').innerText = chainlinkReturns;
-    let chainlinkReturnsPercentage = ((chainlinkReturns / chainlinkTotalCost) * 100).toFixed(2);
     if ((chainlinkReturnsPercentage == 0) || chainlinkTotalCost == 0) {
         document.getElementById('chainlink-returns-percentage').innerText = ' (<0.01%)';
     }
@@ -153,13 +197,9 @@ const update = () => {
 
     document.getElementById('dogecoin-current-quantity').innerText = localStorage.getItem('dogecoin-count');
     document.getElementById('dogecoin-average-cost').innerText = parseFloat(localStorage.getItem('dogecoin-avg-price')).toFixed(4);
-    let dogecoinTotalCost = (parseFloat(localStorage.getItem('dogecoin-count')) * parseFloat(localStorage.getItem('dogecoin-avg-price'))).toFixed(2);
     document.getElementById('dogecoin-total-cost').innerText= dogecoinTotalCost;
-    let dogecoinEquity = ( parseFloat(localStorage.getItem('dogecoin-count')) * parseFloat(localStorage.getItem("dogecoin-current-price"))).toFixed(2);
     document.getElementById('dogecoin-equity').innerText = dogecoinEquity;
-    let dogecoinReturns = (dogecoinEquity - dogecoinTotalCost).toFixed(2);
     document.getElementById('dogecoin-returns').innerText = dogecoinReturns;
-    let dogecoinReturnsPercentage = ((dogecoinReturns / dogecoinTotalCost) * 100).toFixed(2);
     document.getElementById('dogecoin-returns-percentage').innerText = ' (' + dogecoinReturnsPercentage + '%)';
     if (dogecoinReturnsPercentage == 0 || dogecoinTotalCost == 0){
         document.getElementById('dogecoin-returns-percentage').innerText = ' (<0.01%)';
@@ -182,13 +222,9 @@ const update = () => {
     
     document.getElementById('ethereum-current-quantity').innerText = localStorage.getItem('ethereum-count');
     document.getElementById('ethereum-average-cost').innerText = (parseFloat(localStorage.getItem('ethereum-avg-price'))).toFixed(2);
-    let ethereumTotalCost =  (parseFloat(localStorage.getItem('ethereum-count')) * parseFloat(localStorage.getItem('ethereum-avg-price'))).toFixed(2);
     document.getElementById('ethereum-total-cost').innerText = ethereumTotalCost;
-    let ethereumEquity = ( parseFloat(localStorage.getItem('ethereum-count')) * parseFloat(localStorage.getItem("ethereum-current-price"))).toFixed(2);
     document.getElementById('ethereum-equity').innerText = ethereumEquity;
-    let ethereumReturns = (ethereumEquity - ethereumTotalCost).toFixed(2);
     document.getElementById('ethereum-returns').innerText = ethereumReturns;
-    let ethereumReturnsPercentage = ((ethereumReturns / ethereumTotalCost) * 100).toFixed(2);
     document.getElementById('ethereum-returns-percentage').innerText = ' (' + ethereumReturnsPercentage + '%)';
     if (ethereumReturnsPercentage == 0 || ethereumTotalCost == 0){
         document.getElementById('ethereum-returns-percentage').innerText = ' (<0.01%)';
@@ -211,13 +247,9 @@ const update = () => {
 
     document.getElementById('litecoin-current-quantity').innerText = localStorage.getItem('litecoin-count');
     document.getElementById('litecoin-average-cost').innerText = parseFloat(localStorage.getItem('litecoin-avg-price'));
-    let litecoinTotalCost = (parseFloat(localStorage.getItem('litecoin-count')) * parseFloat(localStorage.getItem('litecoin-avg-price'))).toFixed(2);
     document.getElementById('litecoin-total-cost').innerText= litecoinTotalCost;
-    let litecoinEquity = ( parseFloat(localStorage.getItem('litecoin-count')) * parseFloat(localStorage.getItem("litecoin-current-price"))).toFixed(2);
     document.getElementById('litecoin-equity').innerText = litecoinEquity;
-    let litecoinReturns = (litecoinEquity - litecoinTotalCost).toFixed(2);
     document.getElementById('litecoin-returns').innerText = litecoinReturns;
-    let litecoinReturnsPercentage = ((litecoinReturns / litecoinTotalCost) * 100).toFixed(2);
     document.getElementById('litecoin-returns-percentage').innerText = ' (' + litecoinReturnsPercentage + '%)';
     if (litecoinReturnsPercentage == 0 || litecoinTotalCost == 0){
         document.getElementById('litecoin-returns-percentage').innerText = ' (<0.01%)';
@@ -236,14 +268,50 @@ const update = () => {
         document.getElementById('litecoin-returns-percentage').innerText = ' (0%)';
     }
 
-    // Create Charts
 
-    createPieChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
-    createBarChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
-    createDoughnutChart(((parseFloat(localStorage.getItem("cash"))).toFixed(2)),equity.toFixed(2));
+        createTable(stringToArray(localStorage.getItem("allOrders")));
+    }
+
+    // Page = orderHistory.html
+    if(page == "orderHistory.html"){
+        createTable(stringToArray(localStorage.getItem("allOrders")));
+    }
+
+    // Page = performance.html
+    if (page == "performance.html"){
+
+        //Display Total Value of Portfolio:
+    
+        document.getElementById("total-portfolio-value").innerText = totalValue;
+        document.getElementById('total-equity').innerText = equity.toFixed(2);
+        document.getElementById('total-cash').innerText = ((parseFloat(localStorage.getItem("cash"))).toFixed(2));
+        if (totalReturnsPercentage == 0){
+            document.getElementById('total-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('total-returns-percentage').innerText = ' (' + totalReturnsPercentage + '%)';
+        }
+        document.getElementById('total-returns').innerText = totalReturns;
+        if (totalReturns > 0){
+            document.getElementById('returns-text').style.color = 'green';
+            document.getElementById('returns-plus').innerText = '+';
+        }
+        else if (totalReturns < 0){
+            document.getElementById('returns-text').style.color = 'red';
+        }
+        else{
+            document.getElementById('total-returns-percentage').innerText = ' (0%)';
+        }
+
+
+        createPieChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
+        createBarChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
+        createDoughnutChart(((parseFloat(localStorage.getItem("cash"))).toFixed(2)),equity.toFixed(2));
+    }
+
 
     // Append historialPerformance to localStorage
-    historicalPerformance(totalValue);
+    historicalPerformance(totalValue);                                       
 
 }
 

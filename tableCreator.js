@@ -1,7 +1,6 @@
 const createTable = (tableData) => {
 
     var elem = document.getElementById('orders-table');
-    console.log(elem);
     
     if (typeof elem != 'undefined' &&  elem != null)
     {
