@@ -106,8 +106,8 @@ const createTable = (tableData) => {
         tableHeader.appendChild(table5);
         table.appendChild(tableHeader);
 
-
-        document.body.appendChild(table);
+        let tableContainer = document.getElementById('table-container');
+        tableContainer.appendChild(table);
         return;
     }
 
@@ -176,7 +176,6 @@ const createTable = (tableData) => {
             
             row.appendChild(cell);
         });
-
         tableBody.appendChild(row);
         });
         table.appendChild(tableHeader);

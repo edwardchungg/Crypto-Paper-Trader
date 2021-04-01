@@ -77,6 +77,9 @@ const update = () => {
     else if (totalReturns < 0){
         document.getElementById('returns-text').style.color = 'red';
     }
+    else{
+        document.getElementById('total-returns-percentage').innerText = ' (0%)';
+    }
 
 
 
@@ -106,6 +109,9 @@ const update = () => {
     else if (bitcoinReturns < 0){
         document.getElementById('bitcoin-returns-text').style.color='red';
     }
+    else{
+        document.getElementById('bitcoin-returns-percentage').innerText = ' (0%)';
+    }
     
     // Chainlink
 
@@ -132,6 +138,9 @@ const update = () => {
     }
     else if (chainlinkReturns < 0){
         document.getElementById('chainlink-returns-text').style.color='red';
+    }
+    else{
+        document.getElementById('chainlink-returns-percentage').innerText = ' (0%)';
     }
     
     
@@ -160,6 +169,9 @@ const update = () => {
     else if (dogecoinReturns < 0){
         document.getElementById('dogecoin-returns-text').style.color='red';
     }
+    else{
+        document.getElementById('dogecoin-returns-percentage').innerText = ' (0%)';
+    }
     
     // Ethereum
     
@@ -185,6 +197,9 @@ const update = () => {
     }
     else if (ethereumReturns < 0){
         document.getElementById('ethereum-returns-text').style.color='red';
+    }
+    else{
+        document.getElementById('ethereum-returns-percentage').innerText = ' (0%)';
     }
     
     // Litecoin
@@ -212,7 +227,9 @@ const update = () => {
     else if (litecoinReturns < 0){
         document.getElementById('litecoin-returns-text').style.color='red';
     }
-
+    else{
+        document.getElementById('litecoin-returns-percentage').innerText = ' (0%)';
+    }
 
 }
 
