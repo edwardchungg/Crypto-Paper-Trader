@@ -144,134 +144,134 @@ const update = () => {
             document.getElementById('bitcoin-returns-percentage').innerText = ' (0%)';
         }
 
-    // Bitcoin
+        // Bitcoin
 
-    document.getElementById('bitcoin-current-quantity').innerText = localStorage.getItem('bitcoin-count');
-    document.getElementById('bitcoin-average-cost').innerText = (parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
-    document.getElementById('bitcoin-total-cost').innerText = bitcoinTotalCost;
-    document.getElementById('bitcoin-equity').innerText = bitcoinEquity;
-    document.getElementById('bitcoin-returns').innerText = bitcoinReturns;
-    if ((bitcoinReturnsPercentage == 0) || bitcoinTotalCost == 0){
-        document.getElementById('bitcoin-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
-        document.getElementById('bitcoin-returns-percentage').innerText = ' (' + bitcoinReturnsPercentage + '%)';
-    }
-    if(bitcoinReturns > 0){
-        document.getElementById('bitcoin-returns-text').style.color='green';
-        document.getElementById('bitcoin-returns-plus').innerText = '+';
-    }
-    else if (bitcoinReturns < 0){
-        document.getElementById('bitcoin-returns-text').style.color='red';
-    }
-    else{
-        document.getElementById('bitcoin-returns-percentage').innerText = ' (0%)';
-    }
-    
-    // Chainlink
+        document.getElementById('bitcoin-current-quantity').innerText = localStorage.getItem('bitcoin-count');
+        document.getElementById('bitcoin-average-cost').innerText = (parseFloat(localStorage.getItem('bitcoin-avg-price'))).toFixed(2);
+        document.getElementById('bitcoin-total-cost').innerText = bitcoinTotalCost;
+        document.getElementById('bitcoin-equity').innerText = bitcoinEquity;
+        document.getElementById('bitcoin-returns').innerText = bitcoinReturns;
+        if ((bitcoinReturnsPercentage == 0) || bitcoinTotalCost == 0){
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (' + bitcoinReturnsPercentage + '%)';
+        }
+        if(bitcoinReturns > 0){
+            document.getElementById('bitcoin-returns-text').style.color='green';
+            document.getElementById('bitcoin-returns-plus').innerText = '+';
+        }
+        else if (bitcoinReturns < 0){
+            document.getElementById('bitcoin-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('bitcoin-returns-percentage').innerText = ' (0%)';
+        }
+        
+        // Chainlink
 
-    document.getElementById('chainlink-current-quantity').innerText = localStorage.getItem('chainlink-count');
-    document.getElementById('chainlink-average-cost').innerText = (parseFloat(localStorage.getItem('chainlink-avg-price'))).toFixed(2);
-    document.getElementById('chainlink-total-cost').innerText = chainlinkTotalCost;
-    document.getElementById('chainlink-equity').innerText = chainlinkEquity;
-    document.getElementById('chainlink-returns').innerText = chainlinkReturns;
-    if ((chainlinkReturnsPercentage == 0) || chainlinkTotalCost == 0) {
-        document.getElementById('chainlink-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
-        document.getElementById('chainlink-returns-percentage').innerText = ' (' + chainlinkReturnsPercentage + '%)';
-    }
-    
-    if(chainlinkReturns > 0){
-        document.getElementById('chainlink-returns-text').style.color='green';
-        document.getElementById('chainlink-returns-plus').innerText = '+';
-    }
-    else if (chainlinkReturns < 0){
-        document.getElementById('chainlink-returns-text').style.color='red';
-    }
-    else{
-        document.getElementById('chainlink-returns-percentage').innerText = ' (0%)';
-    }
-    
-    
-    // Dogecoin
+        document.getElementById('chainlink-current-quantity').innerText = localStorage.getItem('chainlink-count');
+        document.getElementById('chainlink-average-cost').innerText = (parseFloat(localStorage.getItem('chainlink-avg-price'))).toFixed(2);
+        document.getElementById('chainlink-total-cost').innerText = chainlinkTotalCost;
+        document.getElementById('chainlink-equity').innerText = chainlinkEquity;
+        document.getElementById('chainlink-returns').innerText = chainlinkReturns;
+        if ((chainlinkReturnsPercentage == 0) || chainlinkTotalCost == 0) {
+            document.getElementById('chainlink-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('chainlink-returns-percentage').innerText = ' (' + chainlinkReturnsPercentage + '%)';
+        }
+        
+        if(chainlinkReturns > 0){
+            document.getElementById('chainlink-returns-text').style.color='green';
+            document.getElementById('chainlink-returns-plus').innerText = '+';
+        }
+        else if (chainlinkReturns < 0){
+            document.getElementById('chainlink-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('chainlink-returns-percentage').innerText = ' (0%)';
+        }
+        
+        
+        // Dogecoin
 
-    document.getElementById('dogecoin-current-quantity').innerText = localStorage.getItem('dogecoin-count');
-    document.getElementById('dogecoin-average-cost').innerText = parseFloat(localStorage.getItem('dogecoin-avg-price')).toFixed(4);
-    document.getElementById('dogecoin-total-cost').innerText= dogecoinTotalCost;
-    document.getElementById('dogecoin-equity').innerText = dogecoinEquity;
-    document.getElementById('dogecoin-returns').innerText = dogecoinReturns;
-    document.getElementById('dogecoin-returns-percentage').innerText = ' (' + dogecoinReturnsPercentage + '%)';
-    if (dogecoinReturnsPercentage == 0 || dogecoinTotalCost == 0){
-        document.getElementById('dogecoin-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
+        document.getElementById('dogecoin-current-quantity').innerText = localStorage.getItem('dogecoin-count');
+        document.getElementById('dogecoin-average-cost').innerText = parseFloat(localStorage.getItem('dogecoin-avg-price')).toFixed(4);
+        document.getElementById('dogecoin-total-cost').innerText= dogecoinTotalCost;
+        document.getElementById('dogecoin-equity').innerText = dogecoinEquity;
+        document.getElementById('dogecoin-returns').innerText = dogecoinReturns;
         document.getElementById('dogecoin-returns-percentage').innerText = ' (' + dogecoinReturnsPercentage + '%)';
-    }
-    if(dogecoinReturns > 0){
-        document.getElementById('dogecoin-returns-text').style.color='green';
-        document.getElementById('dogecoin-returns-plus').innerText = '+';
-    }
-    else if (dogecoinReturns < 0){
-        document.getElementById('dogecoin-returns-text').style.color='red';
-    }
-    else{
-        document.getElementById('dogecoin-returns-percentage').innerText = ' (0%)';
-    }
-    
-    // Ethereum
-    
-    document.getElementById('ethereum-current-quantity').innerText = localStorage.getItem('ethereum-count');
-    document.getElementById('ethereum-average-cost').innerText = (parseFloat(localStorage.getItem('ethereum-avg-price'))).toFixed(2);
-    document.getElementById('ethereum-total-cost').innerText = ethereumTotalCost;
-    document.getElementById('ethereum-equity').innerText = ethereumEquity;
-    document.getElementById('ethereum-returns').innerText = ethereumReturns;
-    document.getElementById('ethereum-returns-percentage').innerText = ' (' + ethereumReturnsPercentage + '%)';
-    if (ethereumReturnsPercentage == 0 || ethereumTotalCost == 0){
-        document.getElementById('ethereum-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
+        if (dogecoinReturnsPercentage == 0 || dogecoinTotalCost == 0){
+            document.getElementById('dogecoin-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('dogecoin-returns-percentage').innerText = ' (' + dogecoinReturnsPercentage + '%)';
+        }
+        if(dogecoinReturns > 0){
+            document.getElementById('dogecoin-returns-text').style.color='green';
+            document.getElementById('dogecoin-returns-plus').innerText = '+';
+        }
+        else if (dogecoinReturns < 0){
+            document.getElementById('dogecoin-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('dogecoin-returns-percentage').innerText = ' (0%)';
+        }
+        
+        // Ethereum
+        
+        document.getElementById('ethereum-current-quantity').innerText = localStorage.getItem('ethereum-count');
+        document.getElementById('ethereum-average-cost').innerText = (parseFloat(localStorage.getItem('ethereum-avg-price'))).toFixed(2);
+        document.getElementById('ethereum-total-cost').innerText = ethereumTotalCost;
+        document.getElementById('ethereum-equity').innerText = ethereumEquity;
+        document.getElementById('ethereum-returns').innerText = ethereumReturns;
         document.getElementById('ethereum-returns-percentage').innerText = ' (' + ethereumReturnsPercentage + '%)';
-    }
-    if(ethereumReturns > 0){
-        document.getElementById('ethereum-returns-text').style.color='green';
-        document.getElementById('ethereum-returns-plus').innerText = '+';
-    }
-    else if (ethereumReturns < 0){
-        document.getElementById('ethereum-returns-text').style.color='red';
-    }
-    else{
-        document.getElementById('ethereum-returns-percentage').innerText = ' (0%)';
-    }
-    
-    // Litecoin
+        if (ethereumReturnsPercentage == 0 || ethereumTotalCost == 0){
+            document.getElementById('ethereum-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('ethereum-returns-percentage').innerText = ' (' + ethereumReturnsPercentage + '%)';
+        }
+        if(ethereumReturns > 0){
+            document.getElementById('ethereum-returns-text').style.color='green';
+            document.getElementById('ethereum-returns-plus').innerText = '+';
+        }
+        else if (ethereumReturns < 0){
+            document.getElementById('ethereum-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('ethereum-returns-percentage').innerText = ' (0%)';
+        }
+        
+        // Litecoin
 
-    document.getElementById('litecoin-current-quantity').innerText = localStorage.getItem('litecoin-count');
-    document.getElementById('litecoin-average-cost').innerText = parseFloat(localStorage.getItem('litecoin-avg-price'));
-    document.getElementById('litecoin-total-cost').innerText= litecoinTotalCost;
-    document.getElementById('litecoin-equity').innerText = litecoinEquity;
-    document.getElementById('litecoin-returns').innerText = litecoinReturns;
-    document.getElementById('litecoin-returns-percentage').innerText = ' (' + litecoinReturnsPercentage + '%)';
-    if (litecoinReturnsPercentage == 0 || litecoinTotalCost == 0){
-        document.getElementById('litecoin-returns-percentage').innerText = ' (<0.01%)';
-    }
-    else{
+        document.getElementById('litecoin-current-quantity').innerText = localStorage.getItem('litecoin-count');
+        document.getElementById('litecoin-average-cost').innerText = parseFloat(localStorage.getItem('litecoin-avg-price'));
+        document.getElementById('litecoin-total-cost').innerText= litecoinTotalCost;
+        document.getElementById('litecoin-equity').innerText = litecoinEquity;
+        document.getElementById('litecoin-returns').innerText = litecoinReturns;
         document.getElementById('litecoin-returns-percentage').innerText = ' (' + litecoinReturnsPercentage + '%)';
-    }
-    if(litecoinReturns > 0){
-        document.getElementById('litecoin-returns-text').style.color='green';
-        document.getElementById('litecoin-returns-plus').innerText = '+';
-    }
-    else if (litecoinReturns < 0){
-        document.getElementById('litecoin-returns-text').style.color='red';
-    }
-    else{
-        document.getElementById('litecoin-returns-percentage').innerText = ' (0%)';
-    }
+        if (litecoinReturnsPercentage == 0 || litecoinTotalCost == 0){
+            document.getElementById('litecoin-returns-percentage').innerText = ' (<0.01%)';
+        }
+        else{
+            document.getElementById('litecoin-returns-percentage').innerText = ' (' + litecoinReturnsPercentage + '%)';
+        }
+        if(litecoinReturns > 0){
+            document.getElementById('litecoin-returns-text').style.color='green';
+            document.getElementById('litecoin-returns-plus').innerText = '+';
+        }
+        else if (litecoinReturns < 0){
+            document.getElementById('litecoin-returns-text').style.color='red';
+        }
+        else{
+            document.getElementById('litecoin-returns-percentage').innerText = ' (0%)';
+        }
 
 
-        createTable(stringToArray(localStorage.getItem("allOrders")));
-    }
+            createTable(stringToArray(localStorage.getItem("allOrders")));
+        }
 
     // Page = orderHistory.html
     if(page == "orderHistory.html"){
