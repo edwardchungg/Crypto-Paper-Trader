@@ -1,3 +1,6 @@
+var myChart;
+
+
 // Pie Chart
 
 const createPieChart = (bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity) => {
@@ -34,7 +37,7 @@ const createBarChart = (bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEqu
         datasets: [
             {
             label: "Portfolio Diversity",
-            backgroundColor: ["rgba(242, 169, 0, 0.8)", "rgba(46, 93, 220,0.8)","rgba(217, 189, 98,0.8)","rgba(178, 168, 236, 0.8)","rgba(136, 203, 245 ,0.8)"],
+            backgroundColor: ["rgba(242, 169, 0, 0.8)", "rgba(46, 93, 220,0.8)","rgba(217, 189, 98,0.8)",  ,"rgba(136, 203, 245 ,0.8)"],
             data: [bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity]
             }
         ]
@@ -74,24 +77,32 @@ const createDoughnutChart = (cash,equity) => {
     });
 }
 
-// Bitcoin Line Chart
+// Performance Chart
 
 const createPerformanceChart = (time,value) => {
+
+    if (myChart){
+      myChart.destroy();
+    }
 
     // get last price of value and check to see if profit is above 1,000,000
     const lastItem = value[value.length - 1];
     var lineColor;
     var fillColor;
+    let ctx = document.getElementById("line-chart").getContext('2d');
+    var gradient = ctx.createLinearGradient(0,0,0,400);
     if (parseFloat(lastItem) >= 1000000){
         lineColor='green';
-        fillColor = 'rgba(0, 256, 0, 0.1)';
+        gradient.addColorStop(0,'rgba(0,256,0,0.4');
+        gradient.addColorStop(1,'rgba(0,256,0,0.1');
     }
     else{
         lineColor='red';
-        fillColor = 'rgba(256, 0, 0, 0.1)';
+        gradient.addColorStop(0,'rgba(256,0,0,0.4');
+        gradient.addColorStop(1,'rgba(256,0,0,0.1');
     }
 
-    new Chart(document.getElementById("line-chart"), {
+    myChart = new Chart(document.getElementById("line-chart"), {
         type: 'line',
         data: {
           labels: time,
@@ -100,14 +111,32 @@ const createPerformanceChart = (time,value) => {
               label: "Portfolio",
               borderColor: lineColor,
               fill: true,
-              backgroundColor: fillColor
+              backgroundColor: gradient,
+              borderJoinsStyle: 'round',
+              borderCapsStyle: 'round',
+              borderWidth: 3,
+              pointRadius: 0,
+              pointHitRadius: 10,
+              lineTension: .2,
             }
           ]
         },
         options: {
-          title: {
-            display: true,
-            text: 'Portfolio Value ($)'
+          scales: {
+            xAxes: [{
+              gridLines: {
+                drawOnChartArea: false
+              },
+              display: false
+            }],
+            yAxes: [{
+              gridLines: {drawOnChartArea: false
+              },
+              display: true
+            }]
+          },
+          legend: {
+            display: false
           }
         }
       });
