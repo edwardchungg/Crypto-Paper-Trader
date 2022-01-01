@@ -270,7 +270,10 @@ const update = () => {
         }
 
 
-            createTable(stringToArray(localStorage.getItem("allOrders")));
+        // Display Performance Chart
+
+
+            
         }
 
     // Page = orderHistory.html
@@ -304,7 +307,7 @@ const update = () => {
             document.getElementById('total-returns-percentage').innerText = ' (0%)';
         }
 
-
+        updatePerformanceChart();
         createPieChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
         createBarChart(bitcoinEquity,chainlinkEquity,dogecoinEquity,ethereumEquity,litecoinEquity);
         createDoughnutChart(((parseFloat(localStorage.getItem("cash"))).toFixed(2)),equity.toFixed(2));
@@ -319,8 +322,9 @@ const update = () => {
 const dropdownListener = (value) => {
     document.getElementById("form-current-price").innerText = localStorage.getItem(value);
 }
-const quantityListener = (value) => {
-    document.getElementById("form-order-value").innerText = (value * localStorage.getItem(document.getElementById("crypto-type").value)).toFixed(2);
+const quantityListener = (value, coin) => {
+    console.log(value);
+    document.getElementById(`${coin}-order-value`).innerText = (value * localStorage.getItem(`${coin}-current-price`)).toFixed(2);
 }
 
 

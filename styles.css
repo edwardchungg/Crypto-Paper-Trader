@@ -4,6 +4,7 @@ body{
 }
 
 
+
 .col{
     border: 0.5px solid;
     border-radius: 25px;
@@ -12,8 +13,14 @@ body{
     margin-top: 10px;
 }
 
-.container{
+.container-fluid{
     width: 90%;
+    margin-left: 10;
+    margin-right: 10;
+    
+}
+.container{
+  width: 80%;
 }
 
 #orders-table{
@@ -26,6 +33,10 @@ body{
 }
 .btn-info{
     margin: 10px;
+}
+
+form{
+  width: 100%;
 }
 
 .inputForm-container{

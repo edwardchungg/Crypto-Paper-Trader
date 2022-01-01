@@ -41,7 +41,7 @@ const createOrder = (arr) => {
 }
 
 
-const orderSubmit = () => {
+const orderSubmit = (coin) => {
 
     // 1. Complete the order calculations 
     // Need to write this function
@@ -69,13 +69,13 @@ const orderSubmit = () => {
     let orderType = document.querySelector('input[name="order-type"]:checked').value;
 
     // Grab Cryptocurrency value
-    let cryptocurrency = document.getElementById("crypto-type").value;
+    let cryptocurrency = `${coin}-current-price`;
 
     // Grab Order Quantity
-    let quantity = document.getElementById("order-quantity").value;
+    let quantity = document.getElementById(`${coin}-order-quantity`).value;
 
     // Grab Coin Price from localStorage
-    let price = localStorage.getItem(document.getElementById("crypto-type").value);
+    let price = localStorage.getItem(cryptocurrency);
 
     let totalCost = price * quantity;
     

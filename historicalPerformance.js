@@ -44,7 +44,7 @@ const updatePerformanceChart = () => {
     // Get current page
     let path = window.location.pathname;
     let page = path.split("/").pop();
-    if (page == "performance.html"){
+    if (page == "performance.html" || page =="index.html"){
         createPerformanceChart(timeArray,valueArray);
     }
 
